@@ -9,19 +9,19 @@ export const Modal = ({ src, alt, isOpen, toggleModal }) => {
     }
   };
 
-  const onModalMount = event => {
-    if (event.code === 'Escape') {
-      toggleModal();
-    }
-  };
-
   useEffect(() => {
+    const onModalMount = event => {
+      if (event.code === 'Escape') {
+        toggleModal();
+      }
+    };
+
     window.addEventListener('keydown', onModalMount);
 
     return () => {
       window.removeEventListener('keydown', onModalMount);
     };
-  }, []);
+  }, [toggleModal]);
 
   return createPortal(
     <Overlay onClick={onOverlayClick}>
